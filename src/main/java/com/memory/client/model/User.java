@@ -1,4 +1,4 @@
-package com.memory.clientsdk.model;
+package com.memory.client.model;
 
 import lombok.Data;
 

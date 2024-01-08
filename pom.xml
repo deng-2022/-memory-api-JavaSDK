@@ -9,12 +9,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.memory</groupId>
-    <artifactId>memory-client-sdk</artifactId>
+    <artifactId>memory-client-spring-boot-starter</artifactId>
     <version>0.0.1</version>
     <name>memory-client-sdk</name>
     <description>memory-client-sdk</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
