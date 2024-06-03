@@ -25,9 +25,9 @@ import static com.memory.client.utils.SignUtils.getSign;
 
 public class MemoryClientServiceImpl implements MemoryClientService {
     @Resource
-    private String accessKey;
+    private MemoryClientProperties memoryClientProperties;
 
-    @Resource
+    private String accessKey;
     private String secretKey;
 
     public MemoryClientServiceImpl() {
@@ -37,9 +37,6 @@ public class MemoryClientServiceImpl implements MemoryClientService {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
     }
-
-    @Resource
-    private MemoryClientProperties memoryClientProperties;
 
     /**
      * Gateway 网关地址
@@ -66,7 +63,6 @@ public class MemoryClientServiceImpl implements MemoryClientService {
         paramMap.put("name", name);
         return HttpUtil.post(GATEWAY_HOST + "/api/name/", paramMap);
     }
-
 
     /**
      * 复读机
@@ -125,8 +121,12 @@ public class MemoryClientServiceImpl implements MemoryClientService {
      */
     public Map<String, String> getHeaderMap(String body) {
         Map<String, String> hashMap = new HashMap<>();
-        // String accessKey = memoryClientProperties.getAccessKey();
-        // String secretKey = memoryClientProperties.getSecretKey();
+
+        // 判断是否为登录用户发起测试调用
+        if (accessKey == null && secretKey == null) {
+            accessKey = memoryClientProperties.getAccessKey();
+            secretKey = memoryClientProperties.getSecretKey();
+        }
 
         hashMap.put("accessKey", accessKey);
         hashMap.put("nonce", RandomUtil.randomNumbers(4));
